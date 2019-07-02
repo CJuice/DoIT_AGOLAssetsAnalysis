@@ -12,6 +12,7 @@ def main():
     start_time = time.time()
     print(f"Start Time: {start_time} seconds since Epoch")
 
+    import configparser
     import datetime
     import pandas as pd
     import requests
@@ -25,8 +26,9 @@ def main():
     print(f"\nImports Completed... {Utility.calculate_time_taken(start_time=start_time)} seconds since start")
 
     # VARIABLES
+    parser = configparser.ConfigParser()
     today_date = datetime.datetime.now().strftime("%Y%m%d")
-    summary_json_file = r"Docs\ProcessOutputs\{today_date}_AGOL_Assets_Inventory_Summary.json".format(today_date=today_date)
+    summary_json_file = r"Docs\ProcessOutputs\{today_date}_AGOL_Assets_Inventory_Summary.csv".format(today_date=today_date)
     # FUNCTIONS
 
     # FUNCTIONALITY
@@ -45,14 +47,19 @@ def main():
     value_counts = counts_ser.value_counts()
     sum = value_counts.sum()
     value_counts_dict = value_counts.to_dict()
-    value_counts_dict["TOTAL"] = sum
-
-    summary_df = pd.Series(value_counts_dict).to_frame().reset_index()
-    summary_df.rename(columns={"index": "Asset Type", 0: "Count"}, inplace=True)
-    summary_df.to_json(path_or_buf=summary_json_file, orient="records")
+    value_counts_dict["TOTAL"] = [sum]  # Put into a list so that can create a dataframe directly from passing dict
+    summary_df = pd.DataFrame(value_counts_dict)
+    summary_df.to_csv(path_or_buf=summary_json_file, index=False)
 
     # For print out purposes
     print(summary_df)
+    exit()
+    # Upserting results to hosted table
+    agol_password = parser["AGOL"]["PASSWORD"]
+    agol_root_url = parser["AGOL"]["ROOT_URL"]
+    agol_username = parser["AGOL"]["USER_NAME"]
+    agol_layer_id = parser["AGOL"]["LAYER_ID"]
+    print(f"AGOL variable parsing complete. Time passed since start = {datetime.now() - start_time}")
 
 
     print(f"\nProcess Completed... {Utility.calculate_time_taken(start_time=start_time)} seconds since start")
