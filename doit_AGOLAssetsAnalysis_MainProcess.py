@@ -1,5 +1,7 @@
 """
-
+Process for inspecting the inventory of assets in Maryland ArcGIS Online and providing analysis output.
+Intended to be built on as we develop the analysis we want. A lot of the functionality has been borrowed from
+the data freshness process and will diverge as needed.
 """
 
 
