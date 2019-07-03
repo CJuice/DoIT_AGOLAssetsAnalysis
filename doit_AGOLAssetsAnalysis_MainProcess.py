@@ -15,6 +15,7 @@ def main():
     import configparser
     import pandas as pd
     import requests
+    import doit_AGOLAssetsAnalysis_Variables_AGOL as var
 
     from arcgis.gis import GIS
     from doit_AGOLAssetsAnalysis_Utility import Utility
@@ -27,8 +28,7 @@ def main():
 
     # VARIABLES
     parser = configparser.ConfigParser()
-    md_doit_agol_credentials_config = r"Docs\md_doit_agol_credentials.cfg"
-    parser.read(filenames=[md_doit_agol_credentials_config])
+    parser.read(filenames=[var.credentials_file])
     agol_password = parser["AGOL"]["PASSWORD"]
     agol_root_url = parser["AGOL"]["ROOT_URL"]
     agol_username = parser["AGOL"]["USER_NAME"]
