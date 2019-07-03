@@ -65,6 +65,7 @@ def main():
 
     # Need the total number of assets encountered in the available values for display so add it to the dict
     value_counts_dict["TOTAL"] = total_number_of_assets_encountered
+    print(f"Values encountered: {value_counts_dict}")
 
     # This portion requires the intepreter to be ESRI ArcGIS Pro python
     # Upserting results to hosted table
