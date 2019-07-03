@@ -13,6 +13,8 @@ _root_file_path = os.path.dirname(__file__)
 # all_map_layers = "All map layers from MD iMAP are in the process of being surveyed to determine this information."
 # arcgis_item_url = "https://maryland.maps.arcgis.com/home/item.html?id={item_id}"
 arcgis_root_url = r"https://www.arcgis.com"
+credentials_file = f"{_root_file_path}/Docs/md_doit_agol_credentials.cfg"
+
 # better_metadata_needed = "Better Metadata Needed."
 # dataframe_to_header_mapping_for_excel_output = {"Dataset Name": "title", "Link": "url_agol_item_id",
 #                                                 "Agency Performing Data Updates": "organization_name",
