@@ -2,6 +2,17 @@
 Process for inspecting the inventory of assets in Maryland ArcGIS Online and providing analysis output.
 Intended to be built on as we develop the analysis we want. A lot of the functionality has been borrowed from
 the data freshness process and will diverge as needed.
+
+Request all data catalog assets.
+Get the “type” for each asset.
+Get the unique “type” values and the number of times they occur
+Establish connection with the AGOL assets inventory stats hosted table
+Push the summary stats up to the table to update existing values to most current values
+
+Author: CJuice
+Date Created: 20190703
+Revisions:
+
 """
 
 
@@ -13,7 +24,7 @@ def main():
     print(f"Start Time: {start_time} seconds since Epoch")
 
     import configparser
-    import pandas as pd
+    # import pandas as pd
     import requests
     import doit_AGOLAssetsAnalysis_Variables_AGOL as var
 
