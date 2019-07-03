@@ -1,9 +1,16 @@
 """
 Contains the DatasetAGOL class that is for storing dataset values as class attributes and for providing functionality
 necessary to get/process the values.
+
+NOTE: This was taken from the data freshness process.
+
 Author: CJuice
 Date: 20190702
 Modifications:
+    20190703, CJuice, Because we are required to use ESRI python 3.6 for ArcGIS Pro
+    and it doesn't come with BeautifulSoup4 that has been commented out. The headache of creating new env and adding
+    that module can be dealt with later, if needed. As of 20190703 beautiful soup was not needed for the Assets
+    Analysis Process.
 
 """
 
@@ -13,7 +20,7 @@ import xml.etree.ElementTree as ET
 import requests
 import doit_AGOLAssetsAnalysis_Variables_AGOL as var
 
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 from dateutil import parser as date_parser
 from doit_AGOLAssetsAnalysis_Utility import Utility
 
@@ -482,27 +489,27 @@ class DatasetAGOL:
         self.meta_modification_time_dt = local_inner_function(value=self.meta_modification_time_str)
         self.publication_date_dt = local_inner_function(value=self.publication_date_str)
 
-    def parse_html_attribute_values_to_soup_get_text(self):
-        """
-        Parse html like strings to isolate the text and remove html code, and assign to attribute
-        :return:
-        """
-        def local_inner_function(id_for_error, value):
-            """
-            Parse string using BeautifulSoup to isolate meaningful text (sans html code characters)
-            :param id_for_error: asset id for meaningful printout
-            :param value: string to be souped
-            :return:
-            """
-            try:
-                soup = BeautifulSoup(value, "html.parser")
-                return soup.get_text()
-            except Exception as e:
-                print(f"Unanticipated Exception raised in parsing license_info using BeautifulSoup. Asset: {id_for_error}. {e}")
-                return None
-
-        self.license_info_text = local_inner_function(id_for_error=self.id, value=self.license_info_raw)
-        self.description_text = local_inner_function(id_for_error=self.id, value=self.description_raw)
+    # def parse_html_attribute_values_to_soup_get_text(self):
+    #     """
+    #     Parse html like strings to isolate the text and remove html code, and assign to attribute
+    #     :return:
+    #     """
+    #     def local_inner_function(id_for_error, value):
+    #         """
+    #         Parse string using BeautifulSoup to isolate meaningful text (sans html code characters)
+    #         :param id_for_error: asset id for meaningful printout
+    #         :param value: string to be souped
+    #         :return:
+    #         """
+    #         try:
+    #             soup = BeautifulSoup(value, "html.parser")
+    #             return soup.get_text()
+    #         except Exception as e:
+    #             print(f"Unanticipated Exception raised in parsing license_info using BeautifulSoup. Asset: {id_for_error}. {e}")
+    #             return None
+    #
+    #     self.license_info_text = local_inner_function(id_for_error=self.id, value=self.license_info_raw)
+    #     self.description_text = local_inner_function(id_for_error=self.id, value=self.description_raw)
 
     def process_maintenance_frequency_code(self):
         """
