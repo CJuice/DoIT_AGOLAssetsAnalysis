@@ -24,7 +24,7 @@ def main():
     print(f"Start Time: {start_time} seconds since Epoch")
 
     import configparser
-    # import pandas as pd
+    import pandas as pd
     import requests
     import doit_AGOLAssetsAnalysis_Variables_AGOL as var
 
