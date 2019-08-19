@@ -1,2 +1,2 @@
 # DoIT_AGOLAssetsAnalysis
- Analyzing ArcGIS Online Assets
+Process for inspecting the inventory of assets in Maryland ArcGIS Online and providing analysis output.
