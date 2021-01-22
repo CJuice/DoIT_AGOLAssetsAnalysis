@@ -12,6 +12,7 @@ Push the summary stats up to the table to update existing values to most current
 Author: CJuice
 Date Created: 20190703
 Revisions:
+    20210122, CJuice, added raise exception so that visual cron will recognize graceful fail as error
 
 """
 
@@ -89,6 +90,7 @@ def main():
             exit()
 
         first_record = asset_inventory_features_list[0]
+
         headers_to_skip = ("ObjectId",)
         headers_in_table = first_record.attributes.keys() - headers_to_skip
         for header in headers_in_table:
@@ -102,7 +104,7 @@ def main():
 
     except RuntimeError as rte:
         print(f"Runtime Error raised: {rte}")
-        exit()
+        raise rte
 
     print(f"\nProcess Completed... {Utility.calculate_time_taken(start_time=start_time)} seconds since start")
 
